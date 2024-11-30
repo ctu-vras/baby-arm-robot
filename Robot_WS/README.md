@@ -1,5 +1,6 @@
+# Video demonstration
 
-[![Check the Baby arm video](https://github.com/ctu-vras/baby-arm-robot/blob/master/JehanneArm_Thumbnail.png](https://github.com/ctu-vras/baby-arm-robot/blob/master/BabyArm_CTUhumanoids_2024.mp4)
+[![Check the Baby arm video](https://img.youtube.com/vi/AjOH3sJS-HM/0.jpg)](https://youtu.be/AjOH3sJS-HM?si=Y8BSaiP-1UWCQKFR)
 
 # How to run
 

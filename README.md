@@ -65,7 +65,7 @@ This allows the movements to be defined as follows :
 
 <p align="center">
   <img src=https://github.com/user-attachments/assets/ec88d043-840d-4b9a-b1a2-6d5dd091e7c4>
-  <br> Figure : Définition of differents types of movements
+  <br> Figure : Definition of differents types of movements
 </p>
 
 
@@ -95,104 +95,107 @@ The shoulder is a complex joint that allows us to perform many movements with a 
 
 ### 2.4. Choice of joints
 
-According to the specifications, the robot must have 2 to 3 degrees of freedom to reproduce basic shoulder and elbow movements, inspired by the natural movements of infants. Also for the rest of the project, we strategically chose the elbow flexion, shoulder flexion and shoulder rotation movements, in particular because these are the main movements made by babies in self-touching gestures and exploration of their body. In addition, by allowing the robot to bend and extend its arm at the elbow, its ability to reach objects at different distances without moving the entire arm is improved, which is important because the 2D touch surface can be fragile, so controlling the force applied to it is essential. Shoulder flexion allows the entire arm to be raised or lowered. This movement is important for directing the arm up or down, thus increasing the robot's vertical range of action. Finally, flexion uses simple, robust and easy-to-maintain linear or rotary mechanisms, which increases its reliability for repetitive tasks and can reduce maintenance costs if necessary. However, even if flexion is advantageous, it is essential for us to rotate the robot arm, in order to be able to reach lateral positions and adjust the orientation of the hand and forearm. Thanks to rotation, the robot can interact with the skin at different angles, which is essential for the complex movements that we are trying to reproduce and which require three-dimensional adaptation.
+According to the specifications, the robot must have 2 to 3 degrees of freedom to reproduce basic shoulder and elbow movements, inspired by the natural movements of infants. Also for the rest of the project, we strategically chose the **elbow flexion**, **shoulder flexion** and **shoulder rotation** movements, in particular because these are the main movements made by babies in self-touching gestures and exploration of their body. In addition, by allowing the robot to bend and extend its arm at the elbow, its ability to reach objects at different distances without moving the entire arm is improved, which is important because the 2D touch surface can be fragile, so controlling the force applied to it is essential. Shoulder flexion allows the entire arm to be raised or lowered. This movement is important for directing the arm up or down, thus increasing the robot's vertical range of action. Finally, flexion uses simple, robust and easy-to-maintain linear or rotary mechanisms, which increases its reliability for repetitive tasks and can reduce maintenance costs if necessary. However, even if flexion is advantageous, it is essential for us to rotate the robot arm, in order to be able to reach lateral positions and adjust the orientation of the hand and forearm. Thanks to rotation, the robot can interact with the skin at different angles, which is essential for the complex movements that we are trying to reproduce and which require three-dimensional adaptation.
 
 Here are the movements that we have chosen to keep for the robot and the angular range that corresponds to them and that was tested on the robot:
-Generation of a random position for motor 1 in the interval [650, 1561] or 80° of freedom - Elbow flexion.
-Generation of a random position for motor 2 in the interval [3000, 3776] or 68.2° of freedom - Shoulder rotation.
-Generation of a random position for motor 3 in the interval [1000, 2000] or 87.9° of freedom - Shoulder flexion.
+- Generation of a random position for **motor 1** in the interval **[650, 1561]** or **80°** of freedom - **Elbow flexion**.
+- Generation of a random position for **motor 2** in the interval **[3000, 3776]** or **68.2°** of freedom - **Shoulder rotation**.
+- Generation of a random position for **motor 3** in the interval **[1000, 2000]** or **87.9°** of freedom - **Shoulder flexion**.
 
 
-Bibliography : 
-[1]  PHYSICAL MEDICINE & REHABILITATION PEDIATRIC RANGE of MOTION Chapter 16 published on Aug 10, 2016
-[2] Range of motion measurements: reference values and a database for comparison studies
-J. M. SOUCIE, C. WANG, A. FORSYTH, S. FUNK, M. DENNY, K. E. ROACH, D. BOONE, THE HEMOPHILIA TREATMENT CENTER NETWORK published the 11th November of 2010
+**Bibliography :** 
+- [1]  PHYSICAL MEDICINE & REHABILITATION PEDIATRIC RANGE of MOTION Chapter 16 published on Aug 10, 2016
+- [2] Range of motion measurements: reference values and a database for comparison studies J. M. SOUCIE, C. WANG, A. FORSYTH, S. FUNK, M. DENNY, K. E. ROACH, D. BOONE, THE HEMOPHILIA TREATMENT CENTER NETWORK published the 11th November of 2010
 
-ST3025 - Motors
+## 3. ST3025 - Motors
 
 Library Présentation : SCSServo
 SCSServo, available on waveshare wiki, is the library associated with ST3025 motors usable on Arduino. This library uses an asynchronous serial communication protocol. Only the sms_sts mode of the library is used, there is a list of the main functions present :
 
 
-1. Functions for basic configuration and control :
-CalibrationOfs(int ID): Calibrates the current motor position as its neutral position (new offset).
-Ping(int ID): Checks the connection with the motor by returning its ID if it is accessible.
-unLockEprom(ID): Unlocks access to the protected parameters (EEPROM) of the motor with the specified ID, allowing their modification.
-LockEprom(ID): Locks the EEPROM again after modifications to protect the parameters from accidental changes.
-writeByte(ID, PARAM, VALUE): Modifies a parameter of the motor. It changes the PARAM parameter of the target motor ID to a new value VALUE.
+### 3.1. Functions for basic configuration and control :
+- CalibrationOfs(int ID): Calibrates the current motor position as its neutral position (new offset).
+- Ping(int ID): Checks the connection with the motor by returning its ID if it is accessible.
+- unLockEprom(ID): Unlocks access to the protected parameters (EEPROM) of the motor with the specified ID, allowing their modification.
+- LockEprom(ID): Locks the EEPROM again after modifications to protect the parameters from accidental changes.
+- writeByte(ID, PARAM, VALUE): Modifies a parameter of the motor. It changes the PARAM parameter of the target motor ID to a new value VALUE.
 
 
 
-2. Commands to write positions:
-WritePosEx(int ​​ID, int Position, int Speed, int ACC): Moves motor ID to a given position with a defined speed and acceleration.
-RegWritePosEx(int ​​ID, int Position, int Speed, int ACC): Prepares a position command for a given motor, but waits for a group instruction (RegWriteAction) to execute. This allows the movements of multiple motors to be synchronized.
-RegWriteAction(): Simultaneously executes all commands prepared by RegWritePosEx.
-SyncWritePosEx(byte ID[], int Num, s16 Position[], u16 Speed[], byte ACC[]): Commands multiple motors to move simultaneously to respective positions with specified speeds and accelerations.
+### 3.2. Commands to write positions:
+- WritePosEx(int ​​ID, int Position, int Speed, int ACC): Moves motor ID to a given position with a defined speed and acceleration.
+- RegWritePosEx(int ​​ID, int Position, int Speed, int ACC): Prepares a position command for a given motor, but waits for a group instruction (RegWriteAction) to execute. This allows the movements of multiple motors to be synchronized.
+- RegWriteAction(): Simultaneously executes all commands prepared by RegWritePosEx.
+- SyncWritePosEx(byte ID[], int Num, s16 Position[], u16 Speed[], byte ACC[]): Commands multiple motors to move simultaneously to respective positions with specified speeds and accelerations.
 
 
-3. Functions to read motor states
-FeedBack(int ID): Retrieves the current parameters of a given motor (position, speed, load, voltage, temperature, motion status, and current).
-ReadPos(int ID): Reads the current position of the motor.
-ReadVoltage(int ID): Reads the current supply voltage of the motor.
-ReadTemper(int ID): Reads the internal temperature of the motor.
-ReadSpeed(int ID): Reads the current speed of the motor.
-ReadLoad(int ID): Reads the load applied to the motor.
-ReadCurrent(int ID): Reads the current consumed by the motor.
-ReadMove(int ID): Checks if the motor is moving.
+### 3.3. Functions to read motor states
+- FeedBack(int ID): Retrieves the current parameters of a given motor (position, speed, load, voltage, temperature, motion status, and current).
+- ReadPos(int ID): Reads the current position of the motor.
+- ReadVoltage(int ID): Reads the current supply voltage of the motor.
+- ReadTemper(int ID): Reads the internal temperature of the motor.
+- ReadSpeed(int ID): Reads the current speed of the motor.
+- ReadLoad(int ID): Reads the load applied to the motor.
+- ReadCurrent(int ID): Reads the current consumed by the motor.
+- ReadMove(int ID): Checks if the motor is moving.
 
 
 
 Additionally, the recommended communication speed with the servo driver is 115200 bits per second on the serial line. This speed, called baudrate, is configured at the beginning of each arduino code.
 
-Library Modification 
+### Library Modification 
 
 The functions described in the previous part take over the available instructions of the serial protocol except the RESET instruction. 
 
-
-Figure : Description of the instruction RESET in the file Communication Protocol User Manual
-
-
-For the use of the robot it is important to add the RESET instruction that allows to deactivate the motor torque by removing the power supply to the motor without disconnecting the entire board. Thus, the motor no longer opposes active resistance, leaving only the natural mechanical resistance. The objective is to reduce the risk of damaging the components of the robotic arm and the tactile skin that could be damaged by excessive force from the motors.
-
-	Thus, the functions needed to use the RESET instruction (0x06) in the standard and serial mode of the servomotors have been added in the corresponding source files :
-
-INST.h : 	#define INST_RESET 0x06 ;
-In this file we define a constant that associates the INST_RESET command with the hexadecimal value 0x06. 0x06 being the identifier of the reset instruction in the serial communication protocol, it is this value that will be transmitted to the servo driver to indicate that the operation to be performed is a reset.
-
-SCS.h :  	int resetServo (u8 ID);
-The previous line is the prototyping of the resetServo() method. The resetServo() method is accessible to all other parts of the library source code because they all include the SCS.h header file.
-
-SCS.cpp :
-int SCS :: resetServo(u8 ID)
-{
-	rFlushSCS();
-	writeBuf(ID, 0, NULL, 0, INST_RESET);
-	wFlushSCS();
-	return Ack(ID);
-}
+<p align="center">
+  <img src=https://github.com/user-attachments/assets/3c8c7e38-daf6-4314-b24d-36181afc727b>
+  <br>Figure : Description of the instruction RESET in the file Communication Protocol User Manual
+</p>
 
 
-Here, the resetServo() function is the actual implementation of the function declared in SCS.h. The rFlushSCS() functions are used to read and flush the read buffer. The goal is to prepare the system to receive or write new data without interfering with previous data. The writeBuf() function sends the INST_RESET constant (defined in the inst.h file) specifying the ID of the servomotor that must be reset. The parameters ‘0’, NULL and ‘0’ indicate that there is no data to memorize. The wFlushSCS() function is used to flush and send the write buffer to the servomotor, which ensures that the command is transmitted. Finally, the resetServo() function returns the Ack() function which ensures that the servomotor has received the command and responded correctly. The Ack() function thus returns a success code ‘0’ if the reset was performed correctly and an error code if something failed.
 
-SMS_STS.h : 	
-class SMS_STS : public SCSerial {
-public:
-...
-virtual int resetServo(u8 ID);
-private: 
-... };
+
+For the use of the robot it is important to add the **RESET** instruction that allows to deactivate the motor torque by removing the power supply to the motor without disconnecting the entire board. Thus, the motor no longer opposes active resistance, leaving only the natural mechanical resistance. The objective is to reduce the risk of damaging the components of the robotic arm and the tactile skin that could be damaged by excessive force from the motors.
+
+Thus, the functions needed to use the **RESET** instruction (0x06) in the standard and serial mode of the servomotors have been added in the corresponding source files :
+
+	INST.h : 	#define INST_RESET 0x06 ;
+In this file we define a constant that associates the **INST_RESET** command with the hexadecimal value 0x06. 0x06 being the identifier of the reset instruction in the serial communication protocol, it is this value that will be transmitted to the servo driver to indicate that the operation to be performed is a reset.
+
+	SCS.h :		int resetServo (u8 ID);
+The previous line is the prototyping of the **resetServo()** method. The **resetServo()** method is accessible to all other parts of the library source code because they all include the SCS.h header file.
+
+	SCS.cpp :
+	int SCS :: resetServo(u8 ID)
+	{
+		rFlushSCS();
+		writeBuf(ID, 0, NULL, 0, INST_RESET);
+		wFlushSCS();
+		return Ack(ID);
+	}
+
+
+Here, the **resetServo()** function is the actual implementation of the function declared in SCS.h. The **rFlushSCS()** functions are used to read and flush the read buffer. The goal is to prepare the system to receive or write new data without interfering with previous data. The **writeBuf()** function sends the **INST_RESET** constant (defined in the inst.h file) specifying the ID of the servomotor that must be reset. The parameters ‘0’, NULL and ‘0’ indicate that there is no data to memorize. The **wFlushSCS()** function is used to flush and send the write buffer to the servomotor, which ensures that the command is transmitted. Finally, the resetServo() function returns the **Ack()** function which ensures that the servomotor has received the command and responded correctly. The **Ack()** function thus returns a success code ‘0’ if the reset was performed correctly and an error code if something failed.
+
+	SMS_STS.h : 	
+	class SMS_STS : public SCSerial {
+	public:
+	...
+	virtual int resetServo(u8 ID);
+	private: 
+	... };
 
 	
-Here, we declare a virtual method in the SMS_STS class which is a derived class of SCSerial. The SMS_STS class is specialized in controlling and managing servo motors and uses the basic serial communication provided by the SCSerial class. The SCSerial class itself is derived from the SCS class and acts as an interface for managing servo motors. The resetServo() method takes as a parameter the identifier of the motor to be reset and returns an integer to indicate an error ‘1’ or the success ‘0’ of the reset. This method is an interface to reset a servo motor with a given ID and is defined in the file “SMS_STS.cpp”.
+Here, we declare a virtual method in the **SMS_STS class** which is a derived class of SCSerial. The **SMS_STS** class is specialized in controlling and managing servo motors and uses the basic serial communication provided by the SCSerial class. The SCSerial class itself is derived from the SCS class and acts as an interface for managing servo motors. The **resetServo()** method takes as a parameter the identifier of the motor to be reset and returns an integer to indicate an error ‘1’ or the success ‘0’ of the reset. This method is an interface to reset a servo motor with a given ID and is defined in the file “SMS_STS.cpp”.
 
-SMS_STS.cpp : 	
-int SMS_STS::resetServo(u8 ID)
-{
-	return SCSerial::resetServo(ID);	
-}
+	SMS_STS.cpp : 	
+	int SMS_STS::resetServo(u8 ID)
+	{
+		return SCSerial::resetServo(ID);	
+	}
 
 
-The SMS_STS::resetServo(u8 ID) method calls a similar resetServo() method belonging to the SCSerial class, which is the parent class responsible for serial communication with servo motors. However, the SCSerial class is itself derived from the SCS class. It is therefore in the SCS.h and SCS.cpp files that the resetServo() function was prototyped and defined.
+The **SMS_STS::resetServo(u8 ID)** method calls a similar **resetServo()** method belonging to the SCSerial class, which is the parent class responsible for serial communication with servo motors. However, the SCSerial class is itself derived from the SCS class. It is therefore in the SCS.h and SCS.cpp files that the **resetServo()** function was prototyped and defined.
 
 
 
